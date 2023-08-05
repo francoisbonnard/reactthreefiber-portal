@@ -6,7 +6,7 @@ function App() {
   return (
     <Canvas
       shadows
-      camera={{ position: [3, 3, 3], fov: 30 }}
+      camera={{ position: [0, 0, 10], fov: 30 }}
     >
       <color
         attach='background'
