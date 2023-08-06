@@ -9,7 +9,7 @@ export function Ninja(props) {
   const group = useRef()
   const { nodes, materials, animations } = useGLTF("/models/Ninja.gltf")
   const { actions } = useAnimations(animations, group)
-  console.log(actions)
+  // console.log(actions)
 
   useEffect(() => {
     actions["Idle"].reset().fadeIn(0.5).play()

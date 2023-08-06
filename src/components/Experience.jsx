@@ -15,6 +15,11 @@ import * as THREE from "three"
 import { Ninja } from "./Ninja"
 import { Yeti } from "./Yeti"
 import { BlueDemon } from "./BlueDemon"
+import { NinjaB } from "./NinjaB"
+import { BlueDemonB } from "./BlueDemonB"
+import { Maya } from "./Maya"
+import { exportBlender } from "./exportBlender"
+import { Stars } from "./Stars"
 
 export const Experience = () => {
   const [active, setActive] = useState(null)
@@ -26,21 +31,21 @@ export const Experience = () => {
       {/* <CameraControls ref={controlsRef} /> */}
       <OrbitControls />
       <MonsterStage
-        name='Yeti'
+        name='stars'
         color='#381f14'
         texture='textures/radiant_rocks_in_thje_jungle.jpg'
         position-z={-0.5}
         active={active}
         setActive={setActive}
       >
-        <Yeti
+        <Stars
           scale={0.6}
           position-y={-1}
         />
       </MonsterStage>
 
       <MonsterStage
-        name='Ninja'
+        name='NinjaB'
         color='#4c3d39'
         texture='textures/sky_an_horizon_with_clouds.jpg'
         position-x={-2.5}
@@ -48,14 +53,14 @@ export const Experience = () => {
         active={active}
         setActive={setActive}
       >
-        <Ninja
+        <NinjaB
           scale={0.6}
           position-y={-1}
         />
       </MonsterStage>
 
       <MonsterStage
-        name='BlueDemon'
+        name='Ninja'
         color='#2b2744'
         texture='textures/surreal_scary_mountains.jpg'
         position-x={2.5}
@@ -63,7 +68,7 @@ export const Experience = () => {
         active={active}
         setActive={setActive}
       >
-        <BlueDemon
+        <Ninja
           scale={0.6}
           position-y={-1}
         />
