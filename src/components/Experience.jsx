@@ -20,6 +20,9 @@ import { BlueDemonB } from "./BlueDemonB"
 import { Maya } from "./Maya"
 import { exportBlender } from "./exportBlender"
 import { Stars } from "./Stars"
+import { A_diamant } from "./A_diamant"
+import { A_ecrin_bas } from "./A_ecrin_bas"
+import { A_ecrin_haut } from "./A_ecrin_haut"
 
 export const Experience = () => {
   const [active, setActive] = useState(null)
@@ -31,14 +34,22 @@ export const Experience = () => {
       {/* <CameraControls ref={controlsRef} /> */}
       <OrbitControls />
       <MonsterStage
-        name='stars'
+        name='diamantA'
         color='#381f14'
-        texture='textures/radiant_rocks_in_thje_jungle.jpg'
+        texture='./textures/radiant_rocks_in_thje_jungle.jpg'
         position-z={-0.5}
         active={active}
         setActive={setActive}
       >
-        <Stars
+        <A_diamant
+          scale={0.6}
+          position-y={-1}
+        />
+        <A_ecrin_bas
+          scale={0.6}
+          position-y={-1}
+        />
+        <A_ecrin_haut
           scale={0.6}
           position-y={-1}
         />
@@ -47,7 +58,7 @@ export const Experience = () => {
       <MonsterStage
         name='NinjaB'
         color='#4c3d39'
-        texture='textures/sky_an_horizon_with_clouds.jpg'
+        texture='./textures/sky_an_horizon_with_clouds.jpg'
         position-x={-2.5}
         rotation-y={Math.PI / 8}
         active={active}
@@ -62,7 +73,7 @@ export const Experience = () => {
       <MonsterStage
         name='Ninja'
         color='#2b2744'
-        texture='textures/surreal_scary_mountains.jpg'
+        texture='./textures/surreal_scary_mountains.jpg'
         position-x={2.5}
         rotation-y={-Math.PI / 8}
         active={active}

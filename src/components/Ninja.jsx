@@ -7,7 +7,7 @@ import { useGLTF, useAnimations } from "@react-three/drei"
 
 export function Ninja(props) {
   const group = useRef()
-  const { nodes, materials, animations } = useGLTF("/models/Ninja.gltf")
+  const { nodes, materials, animations } = useGLTF("./models/Ninja.gltf")
   const { actions } = useAnimations(animations, group)
   // console.log(actions)
 

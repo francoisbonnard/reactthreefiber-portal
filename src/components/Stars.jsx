@@ -7,7 +7,7 @@ import { useGLTF, useAnimations } from "@react-three/drei"
 
 export function Stars(props) {
   const group = useRef()
-  const { nodes, materials, animations } = useGLTF("/models/stars.gltf")
+  const { nodes, materials, animations } = useGLTF("./models/stars.gltf")
   const { actions } = useAnimations(animations, group)
   console.log(actions)
   useEffect(() => {
