@@ -14,10 +14,13 @@ import {
   DepthOfField,
 } from "@react-three/postprocessing"
 
+import { useLoader } from "@react-three/fiber"
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
+
 import { BlurPass, Resizer, KernelSize, Resolution } from "postprocessing"
 
 import diamondUrl from "./assets/dflat.glb"
-// import diamondUrl from "./assets/Adiamant.glb"
+import diamondUrl2 from "./assets/Adiamant.glb"
 import textureUrl from "./assets/233.jpg"
 import "./assets/styles.css"
 import { useControls, button, folder } from "leva"
@@ -46,6 +49,8 @@ function Diamonds({ count = 10 }) {
   const { viewport, clock } = useThree()
   const model = useRef()
   const { nodes } = useGLTF(diamondUrl)
+
+  // const { nodes } = useLoader(GLTFLoader, diamondUrl2)
   // Create random position data
   const dummy = useMemo(() => new THREE.Object3D(), [])
   const diamonds = useMemo(
