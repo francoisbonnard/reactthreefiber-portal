@@ -14,11 +14,16 @@ export function A_diamant(props) {
     >
       <mesh
         geometry={nodes.diamant.geometry}
-        material={materials.dia}
         position={[0, 0.5, 0]}
         rotation={[-1.64, 0, 3.12]}
         scale={0.4}
-      />
+      >
+        <meshStandardMaterial
+          color='white'
+          opacity={0.2}
+          transparent
+        />
+      </mesh>
     </group>
   )
 }

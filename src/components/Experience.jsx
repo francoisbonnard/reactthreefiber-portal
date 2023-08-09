@@ -7,6 +7,7 @@ import {
   Text,
   CameraControls,
 } from "@react-three/drei"
+
 import { useFrame } from "@react-three/fiber"
 import * as easing from "maath/easing"
 import React, { useState, useRef } from "react"

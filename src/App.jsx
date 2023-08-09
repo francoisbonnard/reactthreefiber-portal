@@ -1,4 +1,5 @@
 import { Canvas } from "@react-three/fiber"
+
 import { Experience } from "./components/Experience"
 import React, { Suspense } from "react"
 
@@ -12,9 +13,7 @@ function App() {
         attach='background'
         args={["#ececec"]}
       />
-      {/* <React.Suspense fallback={<></>}> */}
       <Experience />
-      {/* </React.Suspense> */}
     </Canvas>
   )
 }

@@ -8,4 +8,5 @@ export default defineConfig({
     outDir: "build",
   },
   base: "https://www.zer0day.io/build/",
+  assetsInclude: "**/*.glb",
 })
