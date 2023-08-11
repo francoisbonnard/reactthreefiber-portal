@@ -18,74 +18,87 @@ import { Yeti } from "./Yeti"
 import { BlueDemon } from "./BlueDemon"
 import { NinjaB } from "./NinjaB"
 import { BlueDemonB } from "./BlueDemonB"
-import { Maya } from "./Maya"
-import { exportBlender } from "./exportBlender"
 import { Stars } from "./Stars"
-import { A_diamant } from "./A_diamant"
 import { A_ecrin_bas } from "./A_ecrin_bas"
 import { A_ecrin_haut } from "./A_ecrin_haut"
-import { A_blooming } from "./A_blooming"
+import { A_diamant } from "./A_diamant"
 
 export const Experience = () => {
   const [active, setActive] = useState(null)
   // const controlsRef = useRef()
   return (
     <>
-      <ambientLight intensity={0.5} />
-      <Environment preset='sunset' />
+      <ambientLight intensity={0.01} />
       {/* <CameraControls ref={controlsRef} /> */}
       <OrbitControls />
       <MonsterStage
-        name='diamantA'
+        name='Ecrin'
         color='#381f14'
+        ambiantIntensity={0}
+        environmentPreset={"night"}
         texture='./textures/radiant_rocks_in_thje_jungle.jpg'
         position-z={-0.5}
         active={active}
         setActive={setActive}
-      >
-        <A_diamant
+        >
+        {/* <A_diamant
           scale={0.6}
           position-y={-1}
-        />
-        <A_ecrin_bas
+        /> */}
+        <directionalLight 
+          castShadow 
+          position={[0, 10, 5]}
+          shadow-mapSize-width={512} 
+          shadow-mapSize-height={512} 
+          shadow-camera-far={50} 
+          shadow-camera-left={-10} 
+          shadow-camera-right={10} 
+          shadow-camera-top={10} 
+          shadow-camera-bottom={-10} 
+      />
+        <A_ecrin_bas castShadow receiveShadow
           scale={0.6}
           position-y={-1}
-        />
-        <A_ecrin_haut
+          />
+        <A_ecrin_haut castShadow receiveShadow
           scale={0.6}
           position-y={-1}
-        />
+          />
       </MonsterStage>
 
       <MonsterStage
-        name='Blooming'
+        name='Diamant'
         color='#4c3d39'
+        ambiantIntensity={0.1}
+        environmentPreset={"night"}
         texture='./textures/sky_an_horizon_with_clouds.jpg'
         position-x={-2.5}
         rotation-y={Math.PI / 8}
         active={active}
         setActive={setActive}
-      >
+        >
         {
-          <A_blooming
-            scale={1}
-            position-y={-1}
+          <A_diamant
+          scale={1}
+          position-y={-1}
           />
         }
       </MonsterStage>
 
       <MonsterStage
-        name='Ninja'
+        name='Stars'
         color='#2b2744'
+        ambiantIntensity={0.1}
+        environmentPreset={"dawn"}
         texture='./textures/surreal_scary_mountains.jpg'
         position-x={2.5}
         rotation-y={-Math.PI / 8}
         active={active}
         setActive={setActive}
-      >
-        <Ninja
-          scale={0.6}
-          position-y={-1}
+        >
+        <Stars
+          scale={1}
+          position-y={-0.5}
         />
       </MonsterStage>
     </>
@@ -94,6 +107,8 @@ export const Experience = () => {
 
 const MonsterStage = ({
   children,
+  ambiantIntensity,
+  environmentPreset,
   texture,
   name,
   color,
@@ -130,8 +145,8 @@ const MonsterStage = ({
           side={THREE.DoubleSide}
           // blend={active === name ? 1 : 0}
         >
-          <ambientLight intensity={0.5} />
-          <Environment preset='sunset' />
+          <ambientLight intensity={ambiantIntensity} />
+          <Environment preset={environmentPreset} />
           {children}
 
           <mesh>
