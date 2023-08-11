@@ -15,7 +15,6 @@ import {
 } from "@react-three/postprocessing"
 
 import { useLoader } from "@react-three/fiber"
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 
 import { BlurPass, Resizer, KernelSize, Resolution } from "postprocessing"
 
@@ -49,8 +48,6 @@ function Diamonds({ count = 10 }) {
   const { viewport, clock } = useThree()
   const model = useRef()
   const { nodes } = useGLTF(diamondUrl)
-
-  // const { nodes } = useLoader(GLTFLoader, diamondUrl2)
   // Create random position data
   const dummy = useMemo(() => new THREE.Object3D(), [])
   const diamonds = useMemo(

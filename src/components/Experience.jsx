@@ -24,6 +24,7 @@ import { Stars } from "./Stars"
 import { A_diamant } from "./A_diamant"
 import { A_ecrin_bas } from "./A_ecrin_bas"
 import { A_ecrin_haut } from "./A_ecrin_haut"
+import { A_blooming } from "./A_blooming"
 
 export const Experience = () => {
   const [active, setActive] = useState(null)
@@ -57,7 +58,7 @@ export const Experience = () => {
       </MonsterStage>
 
       <MonsterStage
-        name='NinjaB'
+        name='Blooming'
         color='#4c3d39'
         texture='./textures/sky_an_horizon_with_clouds.jpg'
         position-x={-2.5}
@@ -65,10 +66,12 @@ export const Experience = () => {
         active={active}
         setActive={setActive}
       >
-        <NinjaB
-          scale={0.6}
-          position-y={-1}
-        />
+        {
+          <A_blooming
+            scale={1}
+            position-y={-1}
+          />
+        }
       </MonsterStage>
 
       <MonsterStage
