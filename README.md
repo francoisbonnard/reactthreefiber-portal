@@ -34,3 +34,52 @@ App_lgl_codesandbox.jsx works with :
     "@react-three/lgl": "0.0.4",
 
 https://codesandbox.io/s/floating-diamonds-prb9t
+
+
+# react get position & rotation informations from a mesh 
+
+```jsx
+export const Experience2 = () => {
+    const [meshInfos, setMeshInfos] = useState({
+        size1: null,
+        rotations1: null,
+    });
+return (
+    <MonsterStage2>
+        <A_ecrin_bas2 onMeshInfoUpdate={(meshInfos) => {
+            console.log("A_ecrin_bas meshInfos : " + meshInfos.rotation1);
+            setMeshInfos(meshInfos);
+            }} />
+    </MonsterStage2>
+)}
+
+
+const MonsterStage2 = ({meshInfos, ...props}) => {
+      console.log("MonsterStage2 meshInfos.size1 : " +
+      JSON.stringify(meshInfos.size1, null, 2)
+  );
+}
+
+export function A_ecrin_bas2({onMeshInfoUpdate, ...props} ) {
+    const meshRef1 = useRef();
+
+    useEffect(() => {
+        if (meshRef1.current && meshRef2.current) {
+        meshRef1.current.geometry.computeBoundingBox();
+        const size1 = meshRef1.current.geometry.boundingBox.getSize(new THREE.Vector3());
+        const rotation1 = meshRef1.current.rotation;
+        const scale1 = meshRef1.current.scale;
+        
+        onMeshInfoUpdate({
+            size1,rotation1, scale1,
+        });
+        }
+    }, []);
+    
+    return (
+        <group {...props} dispose={null}>
+         <mesh ref={meshRef1}
+          geometry={nodes.faceBasse.geometry}
+          material={materials.dia}
+        />
+```
