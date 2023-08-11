@@ -7,6 +7,10 @@ yarn
 yarn dev
 ```
 
+# MeshPortalMaterial
+
+https://github.com/pmndrs/drei/blob/7217da84ac0aca7bee89e695b1f799bfb5e01e04/src/core/MeshPortalMaterial.tsx#L84
+
 # versions
 
     "@react-three/drei": "9.75.0",

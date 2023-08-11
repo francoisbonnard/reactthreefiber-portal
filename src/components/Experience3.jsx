@@ -15,11 +15,11 @@ import * as THREE from "three";
 // import { BackSide } from "three"
 
 import { Stars } from "./Stars";
-import { A_ecrin_bas2 } from "./A_ecrin_bas2";
+import { A_ecrin_bas3 } from "./A_ecrin_bas3";
 import { A_ecrin_haut } from "./A_ecrin_haut";
 import { A_diamant } from "./A_diamant";
 
-export const Experience2 = () => {
+export const Experience3 = () => {
   const [active, setActive] = useState(null);
 
   const [meshInfos, setMeshInfos] = useState({
@@ -46,11 +46,7 @@ export const Experience2 = () => {
         setActive={setActive}
         meshInfos={meshInfos}
       >
-        <A_ecrin_bas2
-          onMeshInfoUpdate={(meshInfos) => {
-            console.log("A_ecrin_bas meshInfos : " + meshInfos.rotation1);
-            setMeshInfos(meshInfos);
-          }}
+        <A_ecrin_bas3
           scale={0.6}
           position-y={-1}
         />
@@ -155,35 +151,10 @@ const MonsterStage2 = ({
   color,
   active,
   setActive,
-  meshInfos,
   ...props
 }) => {
-  // console.log("MonsterStage2 meshInfos.size1_X : " + meshInfos.size1.x);
-  console.log(
-    "MonsterStage2 meshInfos.size1 : " +
-      JSON.stringify(meshInfos.size2, null, 2)
-  );
-  console.log(
-    "MonsterStage2 meshInfos.rotation1 : " +
-      JSON.stringify(meshInfos.rotation2, null, 2)
-  );
-  console.log(
-    "MonsterStage2 meshInfos.scale1 : " +
-      JSON.stringify(meshInfos.scale2, null, 2)
-  );
 
-  const myMap = useTexture(texture);
-  const portalMaterial = useRef();
-  useFrame((_state, delta) => {
-    const worldOpen = active === name;
-    easing.damp(
-      portalMaterial.current,
-      "blend",
-      worldOpen ? 1 : 0,
-      0.25,
-      delta
-    );
-  });
+ 
 
   return (
     <group {...props}>
@@ -199,33 +170,7 @@ const MonsterStage2 = ({
         {name}
         <meshBasicMaterial color={color} toneMapped={false} />
       </Text>
-       {/* <RoundedBox
-        args={[1.4, 1.4, 0.1]}
-        position={[meshInfos.size1.x, meshInfos.size1.y, meshInfos.size1.z]}
-        rotation={[Math.PI / 2, 0 , Math.PI/ 2]}
-        onDoubleClick={() => setActive(active === name ? null : name)}
-      >   */}
-      <RoundedBox
-        args={[1.4, 1.4, 0.1]}
-        rotation={[Math.PI / 2, Math.PI, Math.PI]}
-        position={[0, -0.7, 0]}
-        onDoubleClick={() => setActive(active === name ? null : name)}
-      >
-        <MeshPortalMaterial
-          ref={portalMaterial}
-          side={THREE.simpleSide}
-          // blend={active === name ? 1 : 0}
-        >
-          <ambientLight intensity={ambiantIntensity} />
-          <Environment preset={environmentPreset} />
-
-          <mesh>
-            <sphereGeometry args={[2, 32, 32]} rotation={[0, 0, Math.PI]} />
-
-            <meshStandardMaterial map={myMap} side={THREE.BackSide} />
-          </mesh>
-        </MeshPortalMaterial>
-      </RoundedBox>
+     
     </group>
   );
 };

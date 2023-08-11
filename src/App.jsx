@@ -2,6 +2,8 @@ import { Canvas } from "@react-three/fiber"
 
 import { Experience } from "./components/Experience"
 import { Experience2 } from "./components/Experience2"
+import { Experience3 } from "./components/Experience3"
+
 import React, { Suspense } from "react"
 
 function App() {
@@ -14,7 +16,7 @@ function App() {
         attach='background'
         args={["#000000"]}
       />
-      <Experience2 />
+      <Experience3 />
     </Canvas>
   )
 }
