@@ -6,41 +6,63 @@ import {
   RoundedBox,
   Text,
   CameraControls,
-} from "@react-three/drei";
+} from "@react-three/drei"
 
-import { useFrame } from "@react-three/fiber";
-import * as easing from "maath/easing";
-import React, { useState, useRef } from "react";
-import * as THREE from "three";
+import { useFrame, useThree } from "@react-three/fiber"
+import * as easing from "maath/easing"
+import React, { useState, useRef, useEffect } from "react"
+import * as THREE from "three"
 // import { BackSide } from "three"
 
-import { Stars } from "./Stars";
-import { A_ecrin_bas3 } from "./A_ecrin_bas3";
-import { A_ecrin_haut } from "./A_ecrin_haut";
-import { A_diamant } from "./A_diamant";
+import { Stars } from "./Stars"
+import { A_ecrin_bas3 } from "./A_ecrin_bas3"
+import { A_ecrin_haut } from "./A_ecrin_haut"
+import { A_diamant } from "./A_diamant"
 
 export const Experience3 = () => {
-  const [active, setActive] = useState(null);
+  const [active, setActive] = useState(null)
+  const [hovered, setHovered] = useState(null)
 
   const [meshInfos, setMeshInfos] = useState({
     size1: null,
     rotations1: null,
-    // Ajoutez d'autres propriétés si nécessaire
-  });
+  })
 
-  // const controlsRef = useRef()
+  // animate the camera
+  const { camera } = useThree()
+  const scene = useThree((state) => state.scene)
+  const controlsRef = useRef()
+
+  useEffect(() => {
+    camera.updateProjectionMatrix()
+    if (active) {
+      const targetPosition = new THREE.Vector3()
+      scene.getObjectByName(active).getWorldPosition(targetPosition)
+      controlsRef.current.setLookAt(
+        0,
+        0,
+        5,
+        targetPosition.x,
+        targetPosition.y,
+        targetPosition.z,
+        true
+      )
+    } else {
+      controlsRef.current.setLookAt(0, 0, 10, 0, 0, 0, true)
+    }
+  }, [active])
+
   return (
     <>
       <ambientLight intensity={0.01} />
-      {/* <CameraControls ref={controlsRef} /> */}
-      <OrbitControls />
+      <CameraControls ref={controlsRef} />
 
-      <MonsterStage2
-        name="Ecrin"
-        color="#381f14"
+      <EcrinStage
+        name='Ecrin'
+        color='#381f14'
         ambiantIntensity={0}
         environmentPreset={"dawn"}
-        texture="./textures/radiant_rocks_in_thje_jungle.jpg"
+        texture='./textures/radiant_rocks_in_thje_jungle.jpg'
         position-z={-0.5}
         active={active}
         setActive={setActive}
@@ -50,41 +72,52 @@ export const Experience3 = () => {
           scale={0.6}
           position-y={-1}
         />
-        <A_ecrin_haut scale={0.6} position-y={-1} />
-      </MonsterStage2>
+        <A_ecrin_haut
+          hovered={hovered}
+          setHovered={setHovered}
+          scale={0.6}
+          position-y={-1}
+        />
+      </EcrinStage>
 
-      <MonsterStage
-        name="Diamant"
-        color="#4c3d39"
+      <PortalStage
+        name='Diamant'
+        color='#4c3d39'
         ambiantIntensity={0.1}
         environmentPreset={"night"}
-        texture="./textures/sky_an_horizon_with_clouds.jpg"
+        texture='./textures/sky_an_horizon_with_clouds.jpg'
         position-x={-2.5}
         rotation-y={Math.PI / 8}
         active={active}
         setActive={setActive}
       >
-        <A_diamant scale={1} position-y={-1} />
-      </MonsterStage>
+        <A_diamant
+          scale={1}
+          position-y={-1}
+        />
+      </PortalStage>
 
-      <MonsterStage
-        name="Stars"
-        color="#2b2744"
+      <PortalStage
+        name='Stars'
+        color='#2b2744'
         ambiantIntensity={0.1}
         environmentPreset={"dawn"}
-        texture="./textures/surreal_scary_mountains.jpg"
+        texture='./textures/surreal_scary_mountains.jpg'
         position-x={2.5}
         rotation-y={-Math.PI / 8}
         active={active}
         setActive={setActive}
       >
-        <Stars scale={1} position-y={-0.5} />
-      </MonsterStage>
+        <Stars
+          scale={1}
+          position-y={-0.5}
+        />
+      </PortalStage>
     </>
-  );
-};
+  )
+}
 
-const MonsterStage = ({
+const PortalStage = ({
   children,
   ambiantIntensity,
   environmentPreset,
@@ -95,32 +128,30 @@ const MonsterStage = ({
   setActive,
   ...props
 }) => {
-  const myMap = useTexture(texture);
-  const portalMaterial = useRef();
+  const myMap = useTexture(texture)
+  const portalMaterial = useRef()
   useFrame((_state, delta) => {
-    const worldOpen = active === name;
-    easing.damp(
-      portalMaterial.current,
-      "blend",
-      worldOpen ? 1 : 0,
-      0.25,
-      delta
-    );
-  });
+    const worldOpen = active === name
+    easing.damp(portalMaterial.current, "blend", worldOpen ? 1 : 0, 0.25, delta)
+  })
   return (
     <group {...props}>
       <RoundedBox
+        name={name} // for the useEffect / camera movement
         args={[2, 3, 0.1]}
         onDoubleClick={() => setActive(active === name ? null : name)}
       >
         <Text
-          font="fonts/Caprasimo-Regular.ttf"
+          font='fonts/Caprasimo-Regular.ttf'
           fontSize={0.3}
           position={[0, -1.3, 0.051]}
           anchorY={"bottom"}
         >
           {name}
-          <meshBasicMaterial color={color} toneMapped={false} />
+          <meshBasicMaterial
+            color={color}
+            toneMapped={false}
+          />
         </Text>
         <MeshPortalMaterial
           ref={portalMaterial}
@@ -134,15 +165,18 @@ const MonsterStage = ({
           <mesh>
             <sphereGeometry args={[5, 32, 32]} />
 
-            <meshStandardMaterial map={myMap} side={THREE.BackSide} />
+            <meshStandardMaterial
+              map={myMap}
+              side={THREE.BackSide}
+            />
           </mesh>
         </MeshPortalMaterial>
       </RoundedBox>
     </group>
-  );
-};
+  )
+}
 
-const MonsterStage2 = ({
+const EcrinStage = ({
   children,
   ambiantIntensity,
   environmentPreset,
@@ -153,24 +187,23 @@ const MonsterStage2 = ({
   setActive,
   ...props
 }) => {
-
- 
-
   return (
     <group {...props}>
       <ambientLight intensity={ambiantIntensity} />
       <Environment preset={environmentPreset} />
       {children}
       <Text
-        font="fonts/Caprasimo-Regular.ttf"
+        font='fonts/Caprasimo-Regular.ttf'
         fontSize={0.3}
         position={[0, -1.3, 0.051]}
         anchorY={"bottom"}
       >
         {name}
-        <meshBasicMaterial color={color} toneMapped={false} />
+        <meshBasicMaterial
+          color={color}
+          toneMapped={false}
+        />
       </Text>
-     
     </group>
-  );
-};
+  )
+}
