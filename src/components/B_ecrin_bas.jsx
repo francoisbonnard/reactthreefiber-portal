@@ -12,10 +12,8 @@ import {
 import * as THREE from "three"
 
 export function B_ecrin_bas(props) {
-  const { nodes, materials } = useGLTF("/models/B_ecrin_bas.gltf")
-  const map = useTexture(
-    "../../public/textures/radiant_rocks_in_thje_jungle.jpg"
-  )
+  const { nodes, materials } = useGLTF("./models/B_ecrin_bas.gltf")
+  const map = useTexture("./textures/radiant_rocks_in_thje_jungle.jpg")
   return (
     <group
       {...props}

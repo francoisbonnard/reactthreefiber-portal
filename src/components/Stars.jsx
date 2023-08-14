@@ -59,4 +59,4 @@ export function Stars(props) {
   )
 }
 
-useGLTF.preload("/models/stars.gltf")
+// useGLTF.preload("/models/stars.gltf")
