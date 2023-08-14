@@ -35,8 +35,7 @@ App_lgl_codesandbox.jsx works with :
 
 https://codesandbox.io/s/floating-diamonds-prb9t
 
-
-# react get position & rotation informations from a mesh 
+# react get position & rotation informations from a mesh
 
 ```jsx
 export const Experience2 = () => {
@@ -69,13 +68,13 @@ export function A_ecrin_bas2({onMeshInfoUpdate, ...props} ) {
         const size1 = meshRef1.current.geometry.boundingBox.getSize(new THREE.Vector3());
         const rotation1 = meshRef1.current.rotation;
         const scale1 = meshRef1.current.scale;
-        
+
         onMeshInfoUpdate({
             size1,rotation1, scale1,
         });
         }
     }, []);
-    
+
     return (
         <group {...props} dispose={null}>
          <mesh ref={meshRef1}
@@ -83,3 +82,7 @@ export function A_ecrin_bas2({onMeshInfoUpdate, ...props} ) {
           material={materials.dia}
         />
 ```
+
+# Exporting gltf
+
+npx gltfjsx public/models/B_ecrin_bas.gltf -o "src/components/B_ecrin_bas.jsx" -r "public"
