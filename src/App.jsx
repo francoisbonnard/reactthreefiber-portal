@@ -3,6 +3,7 @@ import { Canvas } from "@react-three/fiber"
 import { Experience } from "./components/Experience"
 import { Experience2 } from "./components/Experience2"
 import { Experience3 } from "./components/Experience3"
+import { ExpSpring } from "./components/ExpSpring"
 
 import React, { Suspense } from "react"
 
