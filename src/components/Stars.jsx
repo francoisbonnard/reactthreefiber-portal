@@ -9,6 +9,7 @@ import {
   MeshRefractionMaterial,
   useAnimations,
 } from "@react-three/drei"
+import { MeshBasicMaterial } from "three"
 
 export function Stars(props) {
   const group = useRef()
