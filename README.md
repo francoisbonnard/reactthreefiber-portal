@@ -83,3 +83,12 @@ export function A_ecrin_bas2({onMeshInfoUpdate, ...props} ) {
           material={materials.dia}
         />
 ```
+
+# Diamond test 
+
+https://codesandbox.io/s/zqrreo
+
+Issue raised here : 
+
+https://discourse.threejs.org/t/react-three-fiber-objects-missing-in-the-mobile-version/55078
+
